@@ -35,7 +35,7 @@ function createCardHTML(article) {
   return `
     <article class="article-card">
       <div class="card-image-wrapper">
-        <a href="/article.html?slug=${article.permalink}">
+        <a href="article.html?slug=${article.permalink}">
           <img src="${article.image}" alt="${article.title}" loading="lazy" onerror="this.src='/assets/images/logo-banner.webp'">
         </a>
         <span class="card-category">${article.category}</span>
@@ -47,10 +47,10 @@ function createCardHTML(article) {
           <span>${article.author}</span>
         </div>
         <h3 class="card-title">
-          <a href="/article.html?slug=${article.permalink}">${article.title}</a>
+          <a href="article.html?slug=${article.permalink}">${article.title}</a>
         </h3>
         <p class="card-desc">${article.searchDescription}</p>
-        <a href="/article.html?slug=${article.permalink}" class="read-more-link">Read Article &rarr;</a>
+        <a href="article.html?slug=${article.permalink}" class="read-more-link">Read Article &rarr;</a>
       </div>
     </article>
   `;
