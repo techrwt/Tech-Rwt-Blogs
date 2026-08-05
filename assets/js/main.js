@@ -4,8 +4,8 @@
 
 document.addEventListener("DOMContentLoaded", async () => {
   // 1. Load Header and Footer Components
-  await loadComponent("header-placeholder", "/components/header.html");
-  await loadComponent("footer-placeholder", "/components/footer.html");
+  await loadComponent("header-placeholder", "components/header.html");
+  await loadComponent("footer-placeholder", "components/footer.html");
 
   // 2. Initialize Theme Switcher
   initThemeSwitcher();
