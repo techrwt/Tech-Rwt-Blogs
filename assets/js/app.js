@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function loadArticles() {
   try {
-    const response = await fetch("/assets/data/articles.json");
+    const response = await fetch("assets/data/articles.json");
     if (!response.ok) throw new Error("Failed to load articles data.");
     
     const articles = await response.json();
