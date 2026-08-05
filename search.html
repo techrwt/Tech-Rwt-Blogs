@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Articles - TECH RWT BLOGS</title>
+  <meta name="description" content="Search across all articles on TECH RWT BLOGS.">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="icon" href="/assets/images/logo-banner.webp" type="image/webp">
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <main class="container main-content" style="max-width: 800px; margin-top: 3rem;">
+    <div class="hero-search-bar" style="margin-bottom: 3rem;">
+      <input type="text" id="searchInput" placeholder="Type to search articles instantly..." autofocus>
+    </div>
+
+    <div class="section-header">
+      <h2>Search Results</h2>
+      <span class="section-line"></span>
+    </div>
+    
+    <div id="searchResultsGrid" style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem;">
+      <p>Start typing above to search...</p>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="/assets/js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const searchInput = document.getElementById("searchInput");
+      const resultsGrid = document.getElementById("searchResultsGrid");
+      
+      let articles = [];
+      try {
+        const response = await fetch("/assets/data/articles.json");
+        articles = await response.json();
+      } catch (error) {
+        console.error("Error loading search index:", error);
+      }
+
+      // Check URL query if redirected with ?q=...
+      const urlParams = new URLSearchParams(window.location.search);
+      const queryParam = urlParams.get("q");
+      if (queryParam) {
+        searchInput.value = queryParam;
+        performSearch(queryParam, articles);
+      }
+
+      searchInput.addEventListener("input", (e) => {
+        performSearch(e.target.value, articles);
+      });
+    });
+
+    function performSearch(query, articles) {
+      const resultsGrid = document.getElementById("searchResultsGrid");
+      const q = query.toLowerCase().trim();
+
+      if (!q) {
+        resultsGrid.innerHTML = "<p>Start typing above to search...</p>";
+        return;
+      }
+
+      const filtered = articles.filter(item => 
+        item.title.toLowerCase().includes(q) || 
+        item.searchDescription.toLowerCase().includes(q) || 
+        item.category.toLowerCase().includes(q)
+      );
+
+      if (filtered.length === 0) {
+        resultsGrid.innerHTML = "<p>No matching articles found.</p>";
+        return;
+      }
+
+      resultsGrid.innerHTML = filtered.map(article => `
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 10px;">
+          <span class="card-category" style="position: static; display: inline-block; margin-bottom: 0.5rem;">${article.category}</span>
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;"><a href="/article.html?slug=${article.permalink}">${article.title}</a></h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem;">${article.searchDescription}</p>
+        </div>
+      `).join("");
+    }
+  </script>
+</body>
+</html>

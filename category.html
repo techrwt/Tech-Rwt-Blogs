@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="catTitle">Category - TECH RWT BLOGS</title>
+  <meta name="description" content="Browse articles by category on TECH RWT BLOGS.">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="icon" href="/assets/images/logo-banner.webp" type="image/webp">
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <main class="container main-content">
+    <div class="section-header" style="margin-top: 2rem;">
+      <h1 id="categoryHeading">Category Articles</h1>
+      <span class="section-line"></span>
+    </div>
+    <div class="articles-grid" id="categoryArticlesGrid">
+      <p>Loading category articles...</p>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="/assets/js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const cat = urlParams.get("cat");
+
+      if (!cat) {
+        document.getElementById("categoryHeading").innerText = "All Categories";
+      } else {
+        document.getElementById("categoryHeading").innerText = `Category: ${cat}`;
+        document.title = `${cat} Articles - TECH RWT BLOGS`;
+      }
+
+      try {
+        const response = await fetch("/assets/data/articles.json");
+        const articles = await response.json();
+        
+        const filtered = cat ? articles.filter(item => item.category.toLowerCase() === cat.toLowerCase()) : articles;
+        
+        const grid = document.getElementById("categoryArticlesGrid");
+        if (filtered.length === 0) {
+          grid.innerHTML = "<p>No articles found in this category.</p>";
+          return;
+        }
+
+        grid.innerHTML = filtered.map(article => `
+          <article class="article-card">
+            <div class="card-image-wrapper">
+              <a href="/article.html?slug=${article.permalink}">
+                <img src="${article.image}" alt="${article.title}" loading="lazy" onerror="this.src='/assets/images/logo-banner.webp'">
+              </a>
+              <span class="card-category">${article.category}</span>
+            </div>
+            <div class="card-content">
+              <div class="card-meta">
+                <span>${article.date}</span>
+                <span>•</span>
+                <span>${article.author}</span>
+              </div>
+              <h3 class="card-title"><a href="/article.html?slug=${article.permalink}">${article.title}</a></h3>
+              <p class="card-desc">${article.searchDescription}</p>
+              <a href="/article.html?slug=${article.permalink}" class="read-more-link">Read Article &rarr;</a>
+            </div>
+          </article>
+        `).join("");
+      } catch (error) {
+        console.error("Error loading category articles:", error);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pageTitle">Article - TECH RWT BLOGS</title>
+  <meta name="description" id="pageDesc" content="Read insightful articles on TECH RWT BLOGS.">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="icon" href="/assets/images/logo-banner.webp" type="image/webp">
+</head>
+<body>
+
+  <!-- Header Placeholder -->
+  <div id="header-placeholder"></div>
+
+  <!-- Article Reader Container -->
+  <main class="container article-reader-container">
+    <div id="articleContentArea">
+      <!-- Dynamically loaded via JavaScript -->
+      <p style="text-align: center; padding: 4rem 0;">Loading article...</p>
+    </div>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="/assets/js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const slug = urlParams.get("slug");
+
+      if (!slug) {
+        document.getElementById("articleContentArea").innerHTML = "<h2>Article not found!</h2><p><a href='/'>Go back to home</a></p>";
+        return;
+      }
+
+      try {
+        const response = await fetch("/assets/data/articles.json");
+        const articles = await response.json();
+        const article = articles.find(item => item.permalink === slug);
+
+        if (!article) {
+          document.getElementById("articleContentArea").innerHTML = "<h2>Article not found!</h2><p><a href='/'>Go back to home</a></p>";
+          return;
+        }
+
+        // Update Meta Tags & Title
+        document.title = `${article.title} - TECH RWT BLOGS`;
+        document.getElementById("pageDesc").setAttribute("content", article.searchDescription);
+
+        // Render Article
+        const container = document.getElementById("articleContentArea");
+        container.innerHTML = `
+          <div class="article-header-single">
+            <span class="card-category">${article.category}</span>
+            <h1>${article.title}</h1>
+            <div class="card-meta">
+              <span>Published on ${article.date}</span>
+              <span>•</span>
+              <span>By ${article.author}</span>
+            </div>
+          </div>
+          <div class="article-featured-image">
+            <img src="${article.image}" alt="${article.title}" onerror="this.src='/assets/images/logo-banner.webp'">
+          </div>
+          <div class="article-body-content">
+            ${article.content}
+          </div>
+        `;
+      } catch (error) {
+        console.error("Error loading article:", error);
+      }
+    });
+  </script>
+</body>
+</html>
