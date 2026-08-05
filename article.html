@@ -37,7 +37,7 @@
       }
 
       try {
-        const response = await fetch("/assets/data/articles.json");
+        const response = await fetch("assets/data/articles.json");
         const articles = await response.json();
         const article = articles.find(item => item.permalink === slug);
 
