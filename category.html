@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title id="catTitle">Category - TECH RWT BLOGS</title>
   <meta name="description" content="Browse articles by category on TECH RWT BLOGS.">
-  <link rel="stylesheet" href="/assets/css/style.css">
-  <link rel="icon" href="/assets/images/logo-banner.webp" type="image/webp">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="assets/images/logo-banner.webp" type="image/webp">
 </head>
 <body>
   <div id="header-placeholder"></div>
@@ -23,7 +23,7 @@
 
   <div id="footer-placeholder"></div>
 
-  <script src="/assets/js/main.js"></script>
+  <script src="assets/js/main.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
       const urlParams = new URLSearchParams(window.location.search);
@@ -37,7 +37,7 @@
       }
 
       try {
-        const response = await fetch("/assets/data/articles.json");
+        const response = await fetch("assets/data/articles.json");
         const articles = await response.json();
         
         const filtered = cat ? articles.filter(item => item.category.toLowerCase() === cat.toLowerCase()) : articles;
@@ -51,8 +51,8 @@
         grid.innerHTML = filtered.map(article => `
           <article class="article-card">
             <div class="card-image-wrapper">
-              <a href="/article.html?slug=${article.permalink}">
-                <img src="${article.image}" alt="${article.title}" loading="lazy" onerror="this.src='/assets/images/logo-banner.webp'">
+              <a href="article.html?slug=${article.permalink}">
+                <img src="${article.image}" alt="${article.title}" loading="lazy" onerror="this.src='assets/images/logo-banner.webp'">
               </a>
               <span class="card-category">${article.category}</span>
             </div>
@@ -62,9 +62,9 @@
                 <span>•</span>
                 <span>${article.author}</span>
               </div>
-              <h3 class="card-title"><a href="/article.html?slug=${article.permalink}">${article.title}</a></h3>
+              <h3 class="card-title"><a href="article.html?slug=${article.permalink}">${article.title}</a></h3>
               <p class="card-desc">${article.searchDescription}</p>
-              <a href="/article.html?slug=${article.permalink}" class="read-more-link">Read Article &rarr;</a>
+              <a href="article.html?slug=${article.permalink}" class="read-more-link">Read Article &rarr;</a>
             </div>
           </article>
         `).join("");
