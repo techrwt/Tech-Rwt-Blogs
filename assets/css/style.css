@@ -569,3 +569,30 @@ button, input {
     padding: 0 10px;
   }
 }
+/* Professional Navbar Buttons Styling */
+nav a, .navbar a, header a {
+    background-color: #f1f3f5; /* Light clean background */
+    color: #212529 !important;  /* Dark clear text */
+    padding: 8px 16px;
+    border-radius: 20px;       /* Pill shape buttons */
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin: 0 4px;
+}
+
+/* Jab mouse button ke upar jaye (Hover effect) */
+nav a:hover, .navbar a:hover, header ahover {
+    background-color: #28a745;  /* Banner wala matching green color */
+    color: #ffffff !important;  /* Text white ho jayega */
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Active ya Current Page ke liye (Optional) */
+nav a.active, .navbar a.active {
+    background-color: #28a745;
+    color: #ffffff !important;
+}
