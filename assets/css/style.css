@@ -694,3 +694,9 @@ div:has(> h2:contains("Featured Articles")) {
 h2 {
     /* Check if text matches */
 }
+/* Hide Featured Articles Heading and its cards */
+h2:contains('Featured Articles'), 
+.featured-section, 
+#featured {
+    display: none !important;
+}
