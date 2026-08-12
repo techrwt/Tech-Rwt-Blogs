@@ -618,3 +618,14 @@ header a:hover, .header a:hover, nav a:hover, .navbar a:hover {
     background-color: #28a745 !important; /* Green color match with banner */
     color: #ffffff !important;
 }
+/* Thoda richer aur noticeable background color */
+body {
+    background-color: #e2e8f0 !important; /* Ek solid aur modern greyish-blue shade jo plain white nahi lagega */
+}
+
+/* Articles/Cards ko alag se white rakhna taaki content ekdum saaf chamke */
+.post-card, .card, article {
+    background-color: #ffffff !important;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
