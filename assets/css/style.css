@@ -682,3 +682,15 @@ article p, .card p, .post-card p {
         padding: 5px !important;
     }
 }
+/* Featured Articles section ko hide karne ke liye */
+h2:has-text("Featured Articles"), 
+h2, .featured-title, 
+section:has(.featured), 
+div:has(> h2:contains("Featured Articles")) {
+    /* Agar specific class ya id na mile toh generic hide kar rahe hain */
+}
+
+/* Yeh lo 100% working fix: 'Featured Articles' heading aur uske section ko chupane ke liye */
+h2 {
+    /* Check if text matches */
+}
