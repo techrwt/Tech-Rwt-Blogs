@@ -524,3 +524,24 @@ button, input {
 .article-body-content li {
   margin-bottom: 0.5rem;
 }
+/* Hero Banner Responsive Fix */
+.hero-section {
+  width: 100%;
+  max-width: 1200px; /* Isse banner PC par bahut zyada lamba nahi failega, ekdum professional size me rahega */
+  margin: 0 auto;    /* Isse banner bilkul beech me (center) aa jayega aur side me thodi jagah chhootegi jo achhi lagti hai */
+  padding: 10px 15px;
+}
+
+.hero-section img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px; /* Thode rounded corners se look aur bhi professional ho jayegi */
+}
+
+/* Mobile Screens ke liye special adjustment */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 5px 10px;
+  }
+}
