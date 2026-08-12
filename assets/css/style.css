@@ -596,3 +596,25 @@ nav a.active, .navbar a.active {
     background-color: #28a745;
     color: #ffffff !important;
 }
+/* Halka Blue Navbar Background */
+header, .header, nav, .navbar {
+    background-color: #e3f2fd !important; /* Premium Halka Blue Shade */
+    padding: 12px 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Light background par text clear dikhne ke liye dark color */
+header a, .header a, nav a, .navbar a {
+    color: #1e293b !important; /* Dark text for high clarity */
+    font-weight: 600;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+/* Mouse over hone par green hover effect */
+header a:hover, .header a:hover, nav a:hover, .navbar a:hover {
+    background-color: #28a745 !important; /* Green color match with banner */
+    color: #ffffff !important;
+}
